@@ -1,11 +1,22 @@
-const videos = [
+const videos: {
+  title: string;
+  description: string | null;
+  thumbnail?: string;
+  alt?: string;
+}[] = [
   {
     title: "The Karoo Sea in South Africa",
-    description: null,
+    description:
+      "An excerpt from a lecture about the ancient Karoo Sea and the geologic history of South Africa.",
+    thumbnail: "video-karoo-sea.jpg",
+    alt: "Jim Jacobs lecturing about the Karoo Sea on a cruise ship stage",
   },
   {
     title: "Glacial Flour in South Africa",
-    description: null,
+    description:
+      "Fine rock particles ground by glaciers create distinctive landforms and water features across South Africa.",
+    thumbnail: "video-glacial-flour.jpg",
+    alt: "Jim Jacobs lecturing about glacial flour on a cruise ship stage",
   },
   {
     title: "The White Cliffs of Dover, England",
@@ -18,6 +29,19 @@ const videos = [
       "Minerals in groundwater strongly influence beer flavor and style in the historic brewing centers of Europe. Local beers are discussed (not in this portion of the talk).",
   },
 ];
+
+function PlayIcon() {
+  return (
+    <svg
+      className="h-14 w-14 text-white drop-shadow-lg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)" />
+      <path d="M9.5 7.5v9l7-4.5-7-4.5z" fill="white" />
+    </svg>
+  );
+}
 
 export function Videos() {
   return (
@@ -39,17 +63,49 @@ export function Videos() {
         {videos.map((v) => (
           <div
             key={v.title}
-            className="rounded-lg border border-gray-200 p-5"
+            className="overflow-hidden rounded-lg border border-gray-200"
           >
-            <h2 className="text-lg font-semibold">
-              Video Lecture Excerpts: {v.title}
-            </h2>
-            {v.description != null && (
-              <p className="mt-2 text-gray-600">{v.description}</p>
+            {v.thumbnail ? (
+              <div className="relative">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/${v.thumbnail}`}
+                  alt={v.alt ?? v.title}
+                  className="h-48 w-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <PlayIcon />
+                </div>
+              </div>
+            ) : (
+              <div className="flex h-48 items-center justify-center bg-gray-100">
+                <div className="text-center text-gray-400">
+                  <PlayIcon />
+                  <p className="mt-2 text-xs">Video excerpt</p>
+                </div>
+              </div>
             )}
+            <div className="p-5">
+              <h2 className="text-lg font-semibold">
+                Video Lecture Excerpts: {v.title}
+              </h2>
+              {v.description != null && (
+                <p className="mt-2 text-sm text-gray-600">{v.description}</p>
+              )}
+            </div>
           </div>
         ))}
       </div>
+
+      <p className="text-center text-sm text-gray-500">
+        Video playback coming soon &mdash; contact{" "}
+        <a
+          href="mailto:jim@sciencevoyager.com"
+          className="text-brand-600 hover:underline"
+        >
+          jim@sciencevoyager.com
+        </a>{" "}
+        for lecture inquiries.
+      </p>
 
       {/* Thank You */}
       <section className="rounded-lg bg-gray-50 p-6">
