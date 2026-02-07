@@ -64,3 +64,7 @@ Content-heavy pages store structured data as typed arrays at the top of the comp
 - **Videos.tsx** — `videos[]` with `title` and `description`
 
 If the data grows, these can be extracted into `src/data/` files.
+
+## Remaining Gaps
+
+See [gap-analysis.md](gap-analysis.md) for a full comparison between the legacy site and /demo, including missing PDF downloads, video embeds, social links, and more.
