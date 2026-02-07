@@ -107,6 +107,8 @@ const destinations: {
   },
   {
     region: "Caribbean: Eastern & Western",
+    image: "destinations/caribbean.jpg",
+    alt: "Cruise ships docked in a turquoise Caribbean port",
     lectures: [
       "Underwater Gardens: Tropical Coral Reefs of the Caribbean",
       "Fire Down Below the Eastern Caribbean",
@@ -121,6 +123,8 @@ const destinations: {
   },
   {
     region: "Iceland, Greenland & the Maritimes",
+    image: "destinations/iceland-greenland.jpg",
+    alt: "Dramatic Icelandic mountain with black sand beach",
     lectures: [
       "Fires Beneath Our Feet: Iceland\u2019s Volcanic Past & Future",
       "Geology of Iceland\u2019s Golden Circle: Rifting, Geysers, & Falls",
@@ -135,6 +139,8 @@ const destinations: {
   },
   {
     region: "Panama Canal to Western Mexico",
+    image: "destinations/panama-canal.jpg",
+    alt: "Container ship passing through the Panama Canal locks",
     lectures: [
       "Mix It Up! Geology and Engineering in the Panama Canal",
       "Fires Below: Volcanoes of Panama, Central America and Mexico",
@@ -149,6 +155,8 @@ const destinations: {
   },
   {
     region: "South America",
+    image: "destinations/south-america.jpg",
+    alt: "Machu Picchu ruins in the Andes mountains",
     lectures: [
       "Machu Picchu & Explorer Hiram Bingham III, Up Close and Personal",
       "Great Civil Engineering of Incan Cities",
@@ -165,6 +173,8 @@ const destinations: {
   },
   {
     region: "Alaska & British Columbia",
+    image: "destinations/alaska.jpg",
+    alt: "Glacier Bay with snow-capped mountains in Alaska",
     lectures: [
       "Fires Beneath Our Feet: Alaska\u2019s Volcanic Past & Future",
       "Rockin\u2019 & Rollin\u2019 to Alaska\u2019s Massive Shakers",
@@ -178,6 +188,8 @@ const destinations: {
   },
   {
     region: "East Asia & Far East",
+    image: "destinations/east-asia.jpg",
+    alt: "Mount Fuji with traditional Japanese pagoda",
     lectures: [
       "Indonesia: Culture, History, and Geologic Resources",
       "Look Out! Massive Tsunamis in East Asia and Japan",
