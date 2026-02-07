@@ -1,5 +1,36 @@
 import { Link } from "react-router-dom";
 
+const downloads = [
+  {
+    title: "2023 Journey to Iceland and Greenland",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2023%20%20-%20Journey%20to%20Iceland%20and%20Greenland.pdf",
+  },
+  {
+    title: "2022 Santorini Annotated Photos",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2022%20Santorini%20annotated%20photos.pdf",
+  },
+  {
+    title: "2022 Beer Venice to Athens",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2022%20Beer%20Venice%20to%20Athens.pdf",
+  },
+  {
+    title: "2021 Geology and Beer",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2021%20Geology%20and%20Beer%20072821.pdf",
+  },
+  {
+    title: "2019 Australia–New Zealand",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2019%20Australia-NZ.pdf",
+  },
+  {
+    title: "2019 Eastern Caribbean",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2019%20Eastern%20Caribbean.pdf",
+  },
+  {
+    title: "2018 Iceland–Greenland",
+    url: "https://img1.wsimg.com/blobby/go/4d715a20-659e-4787-aef6-62e051146677/downloads/2018%20Iceland-Greenland.pdf",
+  },
+];
+
 const testimonials = [
   {
     quote:
@@ -99,6 +130,70 @@ export function Home() {
             </blockquote>
           ))}
         </div>
+      </section>
+
+      {/* Selected Trip Downloads */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold">Selected Trip Downloads</h2>
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {downloads.map((d) => (
+            <li key={d.title}>
+              <a
+                href={d.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-brand-600 transition-colors hover:bg-brand-50 hover:text-brand-700"
+              >
+                <svg
+                  className="h-5 w-5 shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a2 2 0 002 2h14a2 2 0 002-2v-3"
+                  />
+                </svg>
+                <span className="text-sm font-medium">{d.title}</span>
+                <span className="ml-auto text-xs text-gray-400">PDF</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Mailing List Signup */}
+      <section className="rounded-lg bg-brand-50 p-6 text-center">
+        <h2 className="text-xl font-bold">Join Our Mailing List</h2>
+        <p className="mt-2 text-sm text-gray-600">
+          Stay updated on upcoming cruises, new lectures, and travel adventures.
+        </p>
+        <form
+          className="mx-auto mt-4 flex max-w-md gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const email = new FormData(form).get("email") as string;
+            window.location.href = `mailto:jim@sciencevoyager.com?subject=Mailing%20List%20Signup&body=Please%20add%20me%20to%20the%20mailing%20list.%20My%20email%3A%20${encodeURIComponent(email)}`;
+          }}
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Your email address"
+            className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+          />
+          <button
+            type="submit"
+            className="rounded bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
+          >
+            Sign Up
+          </button>
+        </form>
       </section>
 
       {/* Contact CTA */}
