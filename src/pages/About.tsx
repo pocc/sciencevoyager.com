@@ -19,6 +19,11 @@ export function About() {
       {/* Books and Articles */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Books and Articles</h2>
+        <img
+          src={`${import.meta.env.BASE_URL}images/books.jpg`}
+          alt="Five environmental books co-authored by Jim Jacobs"
+          className="rounded-lg"
+        />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim has co-authored five environmental books related to the unintended
           consequences of industrial processes and chemicals. Topics include
@@ -33,6 +38,11 @@ export function About() {
       {/* Teaching */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Teaching</h2>
+        <img
+          src={`${import.meta.env.BASE_URL}images/fulbright-india.jpg`}
+          alt="Fulbright teaching workshop in India"
+          className="rounded-lg"
+        />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim enjoys teaching environmental science and geology and he has
           received four Fulbright Senior Specialists Grants (2003, 2004, 2008,
@@ -48,6 +58,11 @@ export function About() {
       {/* When Not Cruising */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">When Not Cruising</h2>
+        <img
+          src={`${import.meta.env.BASE_URL}images/jim-and-olivia.jpg`}
+          alt="Jim and Olivia Jacobs"
+          className="rounded-lg"
+        />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim works with his wife, Olivia Jacobs, as a forensic hydrogeologist
           and resource scientist in an environmental consulting and engineering
@@ -64,6 +79,11 @@ export function About() {
       {/* Mentoring & Personal */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Dreams of Smooth Sailing</h2>
+        <img
+          src={`${import.meta.env.BASE_URL}images/geology-students.jpg`}
+          alt="Jim mentoring geology students"
+          className="rounded-lg"
+        />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Mentoring young geologists starts early. Jim has given talks to
           elementary school students about earth science and chemistry. He is

@@ -29,6 +29,12 @@ export function Videos() {
         </p>
       </div>
 
+      <img
+        src={`${import.meta.env.BASE_URL}images/jim-azamara-speaker.jpg`}
+        alt="Jim Jacobs next to his speaker biography on Azamara cruise ship"
+        className="w-full rounded-lg object-cover md:h-80"
+      />
+
       <div className="grid gap-6 md:grid-cols-2">
         {videos.map((v) => (
           <div

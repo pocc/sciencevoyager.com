@@ -41,13 +41,20 @@ export function Home() {
   return (
     <div className="space-y-12">
       {/* Hero */}
-      <section className="rounded-lg bg-brand-700 px-6 py-12 text-center text-white md:py-16">
-        <h1 className="text-3xl font-bold md:text-4xl">
-          Lectures: Culture, History and Science for a Truly Memorable Cruise
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-blue-200">
-          Exploring Earth
-        </p>
+      <section className="relative overflow-hidden rounded-lg">
+        <img
+          src={`${import.meta.env.BASE_URL}images/hero-cruise-ship.jpg`}
+          alt="Cruise ship in harbor"
+          className="h-64 w-full object-cover brightness-50 md:h-80"
+        />
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
+          <h1 className="text-3xl font-bold drop-shadow-lg md:text-4xl">
+            Lectures: Culture, History and Science for a Truly Memorable Cruise
+          </h1>
+          <p className="mt-4 text-lg text-blue-200 drop-shadow">
+            Exploring Earth
+          </p>
+        </div>
       </section>
 
       {/* Short Bio */}

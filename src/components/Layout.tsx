@@ -19,7 +19,15 @@ export function Layout() {
       <header className="bg-brand-700 text-white">
         <div className="mx-auto max-w-6xl px-4 py-3">
           <div className="flex items-center justify-between">
-            <div>
+            <div className="flex items-center gap-3">
+              <NavLink to="/">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/logo.png`}
+                  alt="ScienceVoyager"
+                  className="h-10 w-10"
+                />
+              </NavLink>
+              <div>
               <NavLink to="/" className="text-xl font-bold tracking-tight">
                 ScienceVoyager
               </NavLink>
@@ -27,6 +35,7 @@ export function Layout() {
                 Travel and Touring Adventures With Professional Geologists Since
                 2007.
               </p>
+              </div>
             </div>
             <button
               type="button"
