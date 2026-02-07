@@ -22,7 +22,7 @@ export function About() {
         <img
           src={`${import.meta.env.BASE_URL}images/books.jpg`}
           alt="Five environmental books co-authored by Jim Jacobs"
-          className="rounded-lg"
+          className="w-full max-w-2xl rounded-lg"
         />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim has co-authored five environmental books related to the unintended
