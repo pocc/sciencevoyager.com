@@ -1,6 +1,13 @@
-const destinations = [
+const destinations: {
+  region: string;
+  image?: string;
+  alt?: string;
+  lectures: string[];
+}[] = [
   {
     region: "Northern Europe: Norway & Scotland",
+    image: "destinations/norway-fjord.jpg",
+    alt: "Norwegian fjord with waterfalls and mountains",
     lectures: [
       "Chill Out: Glacial Features along the Norwegian Coast",
       "Ride the Tides in Norway\u2019s Fjords",
@@ -16,6 +23,8 @@ const destinations = [
   },
   {
     region: "Baltic & British Isles",
+    image: "destinations/baltic.jpg",
+    alt: "St. Basil's Cathedral in Moscow",
     lectures: [
       "Under the Tsars: St. Petersburg & Peter the Great",
       "Chill Out: Glacial Features of the North and the Baltic Sea",
@@ -30,6 +39,8 @@ const destinations = [
   },
   {
     region: "Transatlantic",
+    image: "destinations/transatlantic.jpg",
+    alt: "Cruise ship at sea",
     lectures: [
       "Rift Zone: The Ripping Apart of the Atlantic Ocean",
       "Battle of the Atlantic: U-Boats and WWII",
@@ -45,6 +56,8 @@ const destinations = [
   },
   {
     region: "Mediterranean: Eastern & Western",
+    image: "destinations/mediterranean.jpg",
+    alt: "The Colosseum in Rome",
     lectures: [
       "Santorini and the Explosion Heard Around the World",
       "Alexandria to Gibraltar: Death Valley of the Mediterranean",
@@ -60,6 +73,8 @@ const destinations = [
   },
   {
     region: "New Zealand to Australia",
+    image: "destinations/new-zealand-australia.jpg",
+    alt: "Sydney Opera House at dusk",
     lectures: [
       "Australia\u2019s Great Barrier Reef: Amazing Underwater Gardens",
       "U-Boats! WWII Naval Battles in New Zealand and Australia",
@@ -74,6 +89,8 @@ const destinations = [
   },
   {
     region: "Hawai\u02BBi and South Pacific",
+    image: "destinations/hawaii-south-pacific.jpg",
+    alt: "Surfer riding a wave",
     lectures: [
       "Fires Down Below the Big Island",
       "Tropical Coral Reefs of Hawai\u02BBi",
@@ -189,16 +206,25 @@ export function DestinationTopics() {
         {destinations.map((d) => (
           <section
             key={d.region}
-            className="rounded-lg border border-gray-200 p-5"
+            className="rounded-lg border border-gray-200 overflow-hidden"
           >
-            <h2 className="text-xl font-semibold text-brand-700">
-              {d.region}
-            </h2>
-            <ol className="mt-3 list-decimal space-y-1 pl-6 text-gray-700">
-              {d.lectures.map((lecture) => (
-                <li key={lecture}>{lecture}</li>
-              ))}
-            </ol>
+            {d.image && (
+              <img
+                src={`${import.meta.env.BASE_URL}images/${d.image}`}
+                alt={d.alt ?? d.region}
+                className="h-48 w-full object-cover"
+              />
+            )}
+            <div className="p-5">
+              <h2 className="text-xl font-semibold text-brand-700">
+                {d.region}
+              </h2>
+              <ol className="mt-3 list-decimal space-y-1 pl-6 text-gray-700">
+                {d.lectures.map((lecture) => (
+                  <li key={lecture}>{lecture}</li>
+                ))}
+              </ol>
+            </div>
           </section>
         ))}
       </div>
