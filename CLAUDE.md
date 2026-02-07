@@ -93,3 +93,5 @@ sciencevoyager.com/
 ### Git
 - Commit messages follow Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`.
 - Do not commit `node_modules/`, `dist/`, or `*.tsbuildinfo`.
+
+- Do not include 'Co-Authored-By' trailers or any AI attribution in git commit messages.
