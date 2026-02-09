@@ -1,11 +1,13 @@
 const destinations: {
   region: string;
+  slug: string;
   image?: string;
   alt?: string;
   lectures: string[];
 }[] = [
   {
     region: "Northern Europe: Norway & Scotland",
+    slug: "norway",
     image: "destinations/norway-fjord.jpg",
     alt: "Norwegian fjord with waterfalls and mountains",
     lectures: [
@@ -23,6 +25,7 @@ const destinations: {
   },
   {
     region: "Baltic & British Isles",
+    slug: "baltic",
     image: "destinations/baltic.jpg",
     alt: "St. Basil's Cathedral in Moscow",
     lectures: [
@@ -39,6 +42,7 @@ const destinations: {
   },
   {
     region: "Transatlantic",
+    slug: "transatlantic",
     image: "destinations/transatlantic.jpg",
     alt: "Cruise ship at sea",
     lectures: [
@@ -56,6 +60,7 @@ const destinations: {
   },
   {
     region: "Mediterranean: Eastern & Western",
+    slug: "mediterranean",
     image: "destinations/mediterranean.jpg",
     alt: "The Colosseum in Rome",
     lectures: [
@@ -73,6 +78,7 @@ const destinations: {
   },
   {
     region: "New Zealand to Australia",
+    slug: "nz-australia",
     image: "destinations/new-zealand-australia.jpg",
     alt: "Sydney Opera House at dusk",
     lectures: [
@@ -89,6 +95,7 @@ const destinations: {
   },
   {
     region: "Hawai\u02BBi and South Pacific",
+    slug: "hawaii",
     image: "destinations/hawaii-south-pacific.jpg",
     alt: "Surfer riding a wave",
     lectures: [
@@ -107,6 +114,7 @@ const destinations: {
   },
   {
     region: "Caribbean: Eastern & Western",
+    slug: "caribbean",
     image: "destinations/caribbean.jpg",
     alt: "Cruise ships docked in a turquoise Caribbean port",
     lectures: [
@@ -123,6 +131,7 @@ const destinations: {
   },
   {
     region: "Iceland, Greenland & the Maritimes",
+    slug: "iceland-greenland",
     image: "destinations/iceland-greenland.jpg",
     alt: "Dramatic Icelandic mountain with black sand beach",
     lectures: [
@@ -139,6 +148,7 @@ const destinations: {
   },
   {
     region: "Panama Canal to Western Mexico",
+    slug: "panama",
     image: "destinations/panama-canal.jpg",
     alt: "Container ship passing through the Panama Canal locks",
     lectures: [
@@ -155,6 +165,7 @@ const destinations: {
   },
   {
     region: "South America",
+    slug: "south-america",
     image: "destinations/south-america.jpg",
     alt: "Machu Picchu ruins in the Andes mountains",
     lectures: [
@@ -173,6 +184,7 @@ const destinations: {
   },
   {
     region: "Alaska & British Columbia",
+    slug: "alaska",
     image: "destinations/alaska.jpg",
     alt: "Glacier Bay with snow-capped mountains in Alaska",
     lectures: [
@@ -188,6 +200,7 @@ const destinations: {
   },
   {
     region: "East Asia & Far East",
+    slug: "east-asia",
     image: "destinations/east-asia.jpg",
     alt: "Mount Fuji with traditional Japanese pagoda",
     lectures: [
@@ -214,11 +227,31 @@ export function DestinationTopics() {
         </p>
       </div>
 
+      {/* Table of Contents */}
+      <nav className="rounded-lg border border-gray-200 bg-gray-50 p-5">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+          Jump to Region
+        </h2>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {destinations.map((d) => (
+            <li key={d.slug}>
+              <a
+                href={`#${d.slug}`}
+                className="inline-block rounded-full border border-brand-200 bg-white px-3 py-1 text-sm text-brand-700 transition-colors hover:bg-brand-600 hover:text-white hover:border-brand-600"
+              >
+                {d.region}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <div className="space-y-8">
         {destinations.map((d) => (
           <section
             key={d.region}
-            className="rounded-lg border border-gray-200 overflow-hidden"
+            id={d.slug}
+            className="scroll-mt-20 rounded-lg border border-gray-200 overflow-hidden"
           >
             {d.image && (
               <img
@@ -231,6 +264,9 @@ export function DestinationTopics() {
               <h2 className="text-xl font-semibold text-brand-700">
                 {d.region}
               </h2>
+              <p className="mt-1 text-sm text-gray-500">
+                {d.lectures.length} lectures
+              </p>
               <ol className="mt-3 list-decimal space-y-1 pl-6 text-gray-700">
                 {d.lectures.map((lecture) => (
                   <li key={lecture}>{lecture}</li>

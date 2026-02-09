@@ -72,19 +72,25 @@ export function Home() {
   return (
     <div className="space-y-12">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-lg">
+      <section className="-mx-4 -mt-8 relative overflow-hidden">
         <img
           src={`${import.meta.env.BASE_URL}images/hero-cruise-ship.jpg`}
           alt="Cruise ship in harbor"
-          className="h-64 w-full object-cover brightness-50 md:h-80"
+          className="h-80 w-full object-cover brightness-[0.4] md:h-[28rem]"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
-          <h1 className="text-3xl font-bold drop-shadow-lg md:text-4xl">
+          <h1 className="max-w-3xl text-3xl font-bold leading-tight drop-shadow-lg md:text-5xl">
             Lectures: Culture, History and Science for a Truly Memorable Cruise
           </h1>
-          <p className="mt-4 text-lg text-blue-200 drop-shadow">
-            Exploring Earth
+          <p className="mt-4 text-lg text-brand-200 drop-shadow md:text-xl">
+            Exploring Earth &mdash; One Port at a Time
           </p>
+          <Link
+            to="/destination-topics"
+            className="mt-6 rounded-lg bg-brand-600 px-6 py-3 text-sm font-medium text-white shadow-lg transition-colors hover:bg-brand-500"
+          >
+            Explore Destinations
+          </Link>
         </div>
       </section>
 
@@ -176,7 +182,7 @@ export function Home() {
           onSubmit={(e) => {
             e.preventDefault();
             const form = e.currentTarget;
-            const email = new FormData(form).get("email") as string;
+            const email = String(new FormData(form).get("email") ?? "");
             window.location.href = `mailto:jim@sciencevoyager.com?subject=Mailing%20List%20Signup&body=Please%20add%20me%20to%20the%20mailing%20list.%20My%20email%3A%20${encodeURIComponent(email)}`;
           }}
         >
@@ -185,11 +191,11 @@ export function Home() {
             name="email"
             required
             placeholder="Your email address"
-            className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
           />
           <button
             type="submit"
-            className="rounded bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
+            className="rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600"
           >
             Sign Up
           </button>
@@ -216,7 +222,7 @@ export function Home() {
         </p>
         <Link
           to="/contact"
-          className="mt-4 inline-block rounded bg-brand-700 px-6 py-2 text-sm font-medium text-white hover:bg-brand-600"
+          className="mt-4 inline-block rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-600"
         >
           Get in Touch
         </Link>

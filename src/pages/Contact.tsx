@@ -12,8 +12,18 @@ export function Contact() {
             onSubmit={(e) => {
               e.preventDefault();
               const data = new FormData(e.currentTarget);
-              const mail = `mailto:jim@sciencevoyager.com?subject=Website Inquiry&body=${encodeURIComponent(String(data.get("message") ?? ""))}`;
-              window.location.href = mail;
+              const name = String(data.get("name") ?? "").trim();
+              const email = String(data.get("email") ?? "").trim();
+              const message = String(data.get("message") ?? "").trim();
+              const body = [
+                name ? `From: ${name}` : "",
+                email ? `Email: ${email}` : "",
+                "",
+                message,
+              ]
+                .filter(Boolean)
+                .join("\n");
+              window.location.href = `mailto:jim@sciencevoyager.com?subject=${encodeURIComponent("Website Inquiry from " + (name || "a visitor"))}&body=${encodeURIComponent(body)}`;
             }}
           >
             <div>
@@ -27,7 +37,7 @@ export function Contact() {
                 type="text"
                 id="name"
                 name="name"
-                className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
               />
             </div>
             <div>
@@ -42,7 +52,7 @@ export function Contact() {
                 id="email"
                 name="email"
                 required
-                className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
               />
             </div>
             <div>
@@ -56,12 +66,12 @@ export function Contact() {
                 id="message"
                 name="message"
                 rows={5}
-                className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
               />
             </div>
             <button
               type="submit"
-              className="rounded bg-brand-700 px-6 py-2 text-sm font-medium text-white hover:bg-brand-600"
+              className="rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-600"
             >
               Send
             </button>
@@ -75,7 +85,10 @@ export function Contact() {
             <p>229 Tewksbury Ave.</p>
             <p>Pt. Richmond, CA 94801 USA</p>
             <p className="mt-4">
-              <a href="tel:+15105901098" className="text-brand-600 hover:underline">
+              <a
+                href="tel:+15105901098"
+                className="text-brand-600 hover:underline"
+              >
                 (510) 590-1098
               </a>
             </p>

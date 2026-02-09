@@ -41,7 +41,7 @@ export function About() {
         <img
           src={`${import.meta.env.BASE_URL}images/fulbright-india.jpg`}
           alt="Fulbright teaching workshop in India"
-          className="rounded-lg"
+          className="max-h-80 w-full max-w-2xl rounded-lg object-cover"
         />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim enjoys teaching environmental science and geology and he has
@@ -61,7 +61,7 @@ export function About() {
         <img
           src={`${import.meta.env.BASE_URL}images/jim-and-olivia.jpg`}
           alt="Jim and Olivia Jacobs"
-          className="rounded-lg"
+          className="max-h-80 w-full max-w-2xl rounded-lg object-cover"
         />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Jim works with his wife, Olivia Jacobs, as a forensic hydrogeologist
@@ -82,7 +82,7 @@ export function About() {
         <img
           src={`${import.meta.env.BASE_URL}images/geology-students.jpg`}
           alt="Jim mentoring geology students"
-          className="rounded-lg"
+          className="max-h-80 w-full max-w-2xl rounded-lg object-cover"
         />
         <p className="max-w-3xl text-gray-700 leading-relaxed">
           Mentoring young geologists starts early. Jim has given talks to
