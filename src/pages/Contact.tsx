@@ -1,4 +1,30 @@
+import { useState } from "react";
+import type { FormEvent } from "react";
+
 export function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/jim@sciencevoyager.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, message, _subject: `Contact form: ${name}`, _replyto: email }),
+      });
+      const result = ((await res.json()) as { success: string });
+      if (result.success !== "true") throw new Error("Failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <div className="space-y-10">
       <h1 className="text-3xl font-bold">Contact</h1>
@@ -7,75 +33,65 @@ export function Contact() {
         {/* Contact Form */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Drop us a line!</h2>
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const data = new FormData(e.currentTarget);
-              const name = String(data.get("name") ?? "").trim();
-              const email = String(data.get("email") ?? "").trim();
-              const message = String(data.get("message") ?? "").trim();
-              const body = [
-                name ? `From: ${name}` : "",
-                email ? `Email: ${email}` : "",
-                "",
-                message,
-              ]
-                .filter(Boolean)
-                .join("\n");
-              window.location.href = `mailto:jim@sciencevoyager.com?subject=${encodeURIComponent("Website Inquiry from " + (name || "a visitor"))}&body=${encodeURIComponent(body)}`;
-            }}
-          >
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+          {status === "sent" ? (
+            <p className="rounded-lg bg-green-50 p-4 text-green-800">Thank you! We'll be in touch shortly.</p>
+          ) : (
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+                />
+              </div>
+              {status === "error" && (
+                <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-600 disabled:opacity-50"
               >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
-              />
-            </div>
-            <button
-              type="submit"
-              className="rounded-lg bg-brand-700 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-600"
-            >
-              Send
-            </button>
-          </form>
+                {status === "sending" ? "Sending..." : "Send"}
+              </button>
+            </form>
+          )}
         </section>
 
         {/* Contact Info */}

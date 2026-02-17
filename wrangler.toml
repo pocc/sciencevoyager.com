@@ -1,0 +1,16 @@
+name = "sciencevoyager"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+account_id = "e7452b39fc737014144e3b3fca412900"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+[[routes]]
+pattern = "sciencevoyager.com"
+custom_domain = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true

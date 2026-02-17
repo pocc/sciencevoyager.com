@@ -4,14 +4,14 @@ import { resolve } from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/demo/",
+  base: "/",
   build: {
     outDir: "dist",
     rollupOptions: {
-      input: resolve(__dirname, "demo.html"),
+      input: resolve(__dirname, "index.html"),
     },
   },
   server: {
-    open: "/demo.html",
+    open: "/",
   },
 });

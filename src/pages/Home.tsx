@@ -1,4 +1,59 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
+function MailingListForm() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    const email = String(new FormData(e.currentTarget).get("email") ?? "");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/jim@sciencevoyager.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email, _subject: "Mailing List Signup", message: `New signup: ${email}`, _replyto: email }),
+      });
+      const result = ((await res.json()) as { success: string });
+      if (result.success !== "true") throw new Error("Failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <section className="rounded-lg bg-brand-50 p-6 text-center">
+      <h2 className="text-xl font-bold">Join Our Mailing List</h2>
+      <p className="mt-2 text-sm text-gray-600">
+        Stay updated on upcoming cruises, new lectures, and travel adventures.
+      </p>
+      {status === "sent" ? (
+        <p className="mt-4 text-sm text-green-700">You're signed up! We'll be in touch.</p>
+      ) : (
+        <form className="mx-auto mt-4 flex max-w-md gap-2" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Your email address"
+            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+          />
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600 disabled:opacity-50"
+          >
+            {status === "sending" ? "Signing up…" : "Sign Up"}
+          </button>
+        </form>
+      )}
+      {status === "error" && (
+        <p className="mt-2 text-sm text-red-600">Something went wrong. Please try again.</p>
+      )}
+    </section>
+  );
+}
 
 const downloads = [
   {
@@ -172,35 +227,7 @@ export function Home() {
       </section>
 
       {/* Mailing List Signup */}
-      <section className="rounded-lg bg-brand-50 p-6 text-center">
-        <h2 className="text-xl font-bold">Join Our Mailing List</h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Stay updated on upcoming cruises, new lectures, and travel adventures.
-        </p>
-        <form
-          className="mx-auto mt-4 flex max-w-md gap-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const form = e.currentTarget;
-            const email = String(new FormData(form).get("email") ?? "");
-            window.location.href = `mailto:jim@sciencevoyager.com?subject=Mailing%20List%20Signup&body=Please%20add%20me%20to%20the%20mailing%20list.%20My%20email%3A%20${encodeURIComponent(email)}`;
-          }}
-        >
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Your email address"
-            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
-          />
-          <button
-            type="submit"
-            className="rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600"
-          >
-            Sign Up
-          </button>
-        </form>
-      </section>
+      <MailingListForm />
 
       {/* Contact CTA */}
       <section className="rounded-lg bg-gray-50 p-6 text-center">
